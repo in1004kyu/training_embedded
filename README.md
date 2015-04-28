@@ -25,8 +25,8 @@ copy to sdcard
 ==
 <pre>
 sudo dd if=arndale-bl1.bin of=/dev/sdb bs=512 seek=1
-sudo dd if=./u-boot-native/spl/smdk5250-spl.bin of=/dev/sdb bs=512 seek=17
-sudo dd if=./u-boot-native/u-boot.bin of=/dev/sdb bs=512 seek=49
+sudo dd if=./u-boot/spl/smdk5250-spl.bin of=/dev/sdb bs=512 seek=17
+sudo dd if=./u-boot/u-boot.bin of=/dev/sdb bs=512 seek=49
 sudo dd if=test.bin of=/dev/sdb bs=512 seek=1105
 sudo sync
 sudo umount /dev/sdb*
