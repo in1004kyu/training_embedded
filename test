@@ -1,0 +1,46 @@
+
+test.elf:     file format elf32-littlearm
+
+
+Disassembly of section .startup:
+
+a0000000 <_Reset>:
+a0000000:	e59fd004 	ldr	sp, [pc, #4]	; a000000c <_Reset+0xc>
+a0000004:	fa00000e 	blx	a0000044 <c_entry>
+a0000008:	eafffffe 	b	a0000008 <_Reset+0x8>
+a000000c:	a0001070 	.word	0xa0001070
+
+Disassembly of section .text:
+
+a0000010 <print_uart0>:
+a0000010:	b480      	push	{r7}
+a0000012:	b083      	sub	sp, #12
+a0000014:	af00      	add	r7, sp, #0
+a0000016:	6078      	str	r0, [r7, #4]
+a0000018:	e00b      	b.n	a0000032 <print_uart0+0x22>
+a000001a:	f240 0358 	movw	r3, #88	; 0x58
+a000001e:	f2ca 0300 	movt	r3, #40960	; 0xa000
+a0000022:	681b      	ldr	r3, [r3, #0]
+a0000024:	687a      	ldr	r2, [r7, #4]
+a0000026:	7812      	ldrb	r2, [r2, #0]
+a0000028:	601a      	str	r2, [r3, #0]
+a000002a:	687b      	ldr	r3, [r7, #4]
+a000002c:	f103 0301 	add.w	r3, r3, #1
+a0000030:	607b      	str	r3, [r7, #4]
+a0000032:	687b      	ldr	r3, [r7, #4]
+a0000034:	781b      	ldrb	r3, [r3, #0]
+a0000036:	2b00      	cmp	r3, #0
+a0000038:	d1ef      	bne.n	a000001a <print_uart0+0xa>
+a000003a:	f107 070c 	add.w	r7, r7, #12
+a000003e:	46bd      	mov	sp, r7
+a0000040:	bc80      	pop	{r7}
+a0000042:	4770      	bx	lr
+
+a0000044 <c_entry>:
+a0000044:	b580      	push	{r7, lr}
+a0000046:	af00      	add	r7, sp, #0
+a0000048:	f240 005c 	movw	r0, #92	; 0x5c
+a000004c:	f2ca 0000 	movt	r0, #40960	; 0xa000
+a0000050:	f7ff ffde 	bl	a0000010 <print_uart0>
+a0000054:	bd80      	pop	{r7, pc}
+a0000056:	bf00      	nop
